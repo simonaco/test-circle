@@ -14,7 +14,6 @@ jobs:
             - restore_cache:
                 keys:
                   - components-lib-{{ .Revision }}
-            - run: npm run install
             - run: npm run cypress:all
 workflows:
   build-components-and-app:

@@ -1,0 +1,22 @@
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1
+  node: circleci/node@1.1.6
+
+jobs:
+  test-goodreads:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - restore_cache:
+                keys:
+                  - components-lib-{{ .Revision }}
+            - run: npm run install
+            - run: npm run cypress:all
+workflows:
+  build-components-and-app:
+    jobs:
+      - test-goodreads
